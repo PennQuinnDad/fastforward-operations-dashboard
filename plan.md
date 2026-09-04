@@ -11,6 +11,7 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 - **Information hierarchy:** KPIs first, trend and regional comparison second, actionable exceptions third.
 - **Prototype data strategy:** Keep representative data local until a TMS/API contract exists.
 - **Visual direction:** Use an evergreen operations rail, warm neutral surfaces, and teal/amber/coral status colors to support quick risk scanning.
+- **UI foundation:** Register Vuetify 3 globally for accessible, reusable components while preserving the custom FastForward visual system during incremental adoption.
 
 ## Delivery status
 
@@ -19,6 +20,7 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 - [x] Scaffold a Vue and Vite application.
 - [x] Add the production build command and Vite Vue configuration.
 - [x] Add Lucide icons for consistent interface controls.
+- [x] Add Vuetify 3 and Vite auto-import support as the component foundation.
 - [x] Add repository documentation, AI guidance, and ignore rules.
 
 ### 2. Dashboard experience
@@ -50,8 +52,9 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 
 - `src/App.vue` owns the local data model, state, and dashboard composition.
 - `src/style.css` owns the visual system, chart styling, table layout, and responsive breakpoints.
-- `src/main.js` mounts the Vue application.
-- `vite.config.js` registers the Vue plugin for production builds.
+- `src/main.js` mounts the Vue application and registers Vuetify.
+- `vite.config.js` registers the Vue plugin and Vuetify auto-import support for production builds.
+- `vuetify` is available for future shared controls; the current overview intentionally keeps its custom CSS and Lucide icon treatment.
 - `context/product-notes.md` records data assumptions and future work.
 
 ## Next production increments
@@ -92,6 +95,15 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 - Protect the deployed dashboard behind the chosen authentication layer.
 
 **Acceptance:** The dashboard remains usable during slow, empty, or failed data responses and passes the release accessibility and responsive checks.
+
+### Phase 5: Adopt the component foundation deliberately
+
+- Replace repeated form and action primitives with Vuetify components where they improve accessibility or consistency.
+- Establish a small FastForward theme for shared Vuetify controls without flattening the dashboard's custom visual hierarchy.
+- Keep data-dense dashboard surfaces custom when a generic component would reduce scanability.
+- Document component selection rules in the context notes as the UI grows.
+
+**Acceptance:** New controls use the shared Vuetify foundation consistently, while the overview still feels like a FastForward operations tool rather than an unthemed component demo.
 
 ## Risks and guardrails
 

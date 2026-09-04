@@ -1,0 +1,30 @@
+# FastForward Operations Dashboard
+
+An executive operations dashboard prototype for the fictional FastForward Logistics freight network. It turns shipment volume, service performance, regional health, and open exceptions into one meeting-ready view.
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Then open the local URL printed by Vite, usually `http://127.0.0.1:5173/`.
+
+## Validate a production build
+
+```bash
+npm run build
+```
+
+## Project map
+
+- `src/App.vue`: dashboard data model, layout, and interactions.
+- `src/style.css`: visual system and responsive layout.
+- `src/main.js`: Vue application entry point.
+- `BRIEF.md`: client context, product scope, and design decisions.
+- `context/`: maintained AI working notes for future sessions.
+
+## Prototype interactions
+
+The sidebar navigation updates the active view label, the date selector changes the selected reporting window, the exceptions search filters the visible rows, and “View all exceptions” expands the queue. Data is intentionally local and representative because no production TMS connection exists for this prototype.

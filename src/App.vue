@@ -1,8 +1,13 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { Activity, AlertTriangle, ArrowDownRight, ArrowUpRight, BarChart3, Bell, ChevronDown, CircleHelp, Clock3, Download, ExternalLink, Filter, LayoutDashboard, Map, PackageCheck, Search, Settings2, Truck } from 'lucide-vue-next'
+import ShipmentsPage from './pages/ShipmentsPage.vue'
+import ShipmentDetailPage from './pages/ShipmentDetailPage.vue'
 
-const activeNav = ref('Overview')
+const route = useRoute()
+const router = useRouter()
+const activeNav = computed(() => route.name === 'shipments' || route.name === 'shipment-detail' ? 'Shipments' : 'Overview')
 const selectedWindow = ref('Last 30 days')
 const searchQuery = ref('')
 const showAll = ref(false)
@@ -32,6 +37,11 @@ const visibleExceptions = computed(() => (showAll.value ? exceptions : exception
   const query = searchQuery.value.trim().toLowerCase()
   return !query || Object.values(item).some((value) => String(value).toLowerCase().includes(query))
 }))
+
+function navigate(label) {
+  if (label === 'Overview') router.push('/')
+  if (label === 'Shipments') router.push('/shipments')
+}
 </script>
 
 <template>
@@ -39,13 +49,13 @@ const visibleExceptions = computed(() => (showAll.value ? exceptions : exception
     <aside class="sidebar">
       <div class="brand-lockup"><div class="brand-mark"><Activity :size="19" /></div><div><strong>FASTFORWARD</strong><span>LOGISTICS</span></div></div>
       <div class="workspace-switcher"><span class="eyebrow">WORKSPACE</span><button class="workspace-button">Operations HQ <ChevronDown :size="15" /></button></div>
-      <nav class="main-nav" aria-label="Main navigation"><span class="nav-label">COMMAND CENTER</span><button v-for="item in navItems" :key="item.label" :class="['nav-item', { active: activeNav === item.label }]" @click="activeNav = item.label"><component :is="item.icon" :size="18" /><span>{{ item.label }}</span><span v-if="item.count" class="nav-count">{{ item.count }}</span></button></nav>
+      <nav class="main-nav" aria-label="Main navigation"><span class="nav-label">COMMAND CENTER</span><button v-for="item in navItems" :key="item.label" :class="['nav-item', { active: activeNav === item.label }]" @click="navigate(item.label)"><component :is="item.icon" :size="18" /><span>{{ item.label }}</span><span v-if="item.count" class="nav-count">{{ item.count }}</span></button></nav>
       <div class="sidebar-bottom"><button class="nav-item"><Map :size="18" /><span>Network map</span></button><button class="nav-item"><Settings2 :size="18" /><span>Settings</span></button><div class="user-profile"><div class="avatar">SO</div><div><strong>Sarah Olsen</strong><span>VP, Operations</span></div><ChevronDown :size="15" class="profile-chevron" /></div></div>
     </aside>
 
     <main class="main-content">
       <header class="topbar"><div class="breadcrumb"><span>Operations</span><span class="slash">/</span><strong>{{ activeNav }}</strong></div><div class="topbar-actions"><span class="status-dot"><i></i> Data refreshed 4 min ago</span><button class="icon-button" aria-label="Notifications"><Bell :size="18" /><span class="notification-dot"></span></button><button class="icon-button" aria-label="Help"><CircleHelp :size="18" /></button></div></header>
-      <div class="content-wrap">
+      <div v-if="route.name === 'overview'" class="content-wrap">
         <section class="page-heading"><div><p class="kicker">THURSDAY, SEPTEMBER 4, 2026</p><h1>Good morning, Sarah.</h1><p class="subheading">Here is how the network is moving today.</p></div><div class="heading-actions"><label class="select-control"><span class="sr-only">Date range</span><select v-model="selectedWindow"><option>Last 30 days</option><option>Last 7 days</option><option>Quarter to date</option></select><ChevronDown :size="15" /></label><button class="secondary-button"><Download :size="16" /> Export report</button></div></section>
         <section class="kpi-grid"><article v-for="kpi in kpis" :key="kpi.label" class="kpi-card"><div class="kpi-topline"><span>{{ kpi.label }}</span><div :class="['kpi-icon', kpi.tone]"><component :is="kpi.icon" :size="17" /></div></div><div class="kpi-value">{{ kpi.value }}</div><div class="kpi-foot"><span :class="['change', kpi.tone === 'red' ? 'negative' : 'positive']"><ArrowUpRight v-if="kpi.direction === 'up'" :size="14" /><ArrowDownRight v-else :size="14" />{{ kpi.change }}</span><span>{{ kpi.context }}</span></div></article></section>
         <section class="main-grid">
@@ -55,6 +65,8 @@ const visibleExceptions = computed(() => (showAll.value ? exceptions : exception
         <section class="panel exceptions-panel"><div class="panel-header exceptions-header"><div><span class="panel-kicker">NEEDS ATTENTION</span><h2>Open exceptions <span class="inline-count">12</span></h2></div><div class="exception-actions"><label class="search-control"><Search :size="15" /><input v-model="searchQuery" placeholder="Search exceptions" /></label><button class="more-button" @click="showAll = !showAll">{{ showAll ? 'Show less' : 'View all exceptions' }} <ArrowUpRight :size="14" /></button></div></div><div class="table-head"><span>SHIPMENT</span><span>ISSUE</span><span>LANE</span><span>OWNER</span><span>AGE</span><span>PRIORITY</span></div><div v-for="item in visibleExceptions" :key="item.id" class="exception-row"><strong class="shipment-id">{{ item.id }}</strong><span>{{ item.issue }}</span><span class="lane">{{ item.lane }}</span><span>{{ item.owner }}</span><span class="muted">{{ item.age }}</span><span :class="['priority', item.tone]">{{ item.priority }}</span></div><div v-if="visibleExceptions.length === 0" class="empty-state">No exceptions match that search.</div></section>
         <p class="footer-note"><span class="pulse"></span> All systems operational <span class="footer-divider">|</span> Last synced from TMS at 8:42 AM CT</p>
       </div>
+      <ShipmentsPage v-else-if="route.name === 'shipments'" />
+      <ShipmentDetailPage v-else-if="route.name === 'shipment-detail'" />
     </main>
   </div>
 </template>

@@ -9,12 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vitejs/plugin-vue": "latest",
     "@mdi/font": "latest",
+    "@vitejs/plugin-vue": "latest",
     "lucide-vue-next": "latest",
     "vite": "latest",
-    "vue": "latest",
     "vite-plugin-vuetify": "latest",
+    "vue": "latest",
+    "vue-router": "^5.3.1",
     "vuetify": "latest"
   }
 }

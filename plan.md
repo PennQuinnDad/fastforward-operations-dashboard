@@ -31,6 +31,8 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 - [x] Add the regional service performance scorecard.
 - [x] Add the open exceptions table with lane, owner, age, and priority.
 - [x] Add responsive desktop and mobile layouts.
+- [x] Add a shipments overview with search, status filtering, and shipment KPIs.
+- [x] Add shipment detail pages with route summary, timeline, metadata, and exceptions.
 
 ### 3. Core interactions
 
@@ -39,6 +41,8 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 - [x] Filter exceptions by search text.
 - [x] Expand and collapse the exceptions queue.
 - [x] Handle no matching exception results with an empty state.
+- [x] Handle unknown shipment IDs with a not-found state.
+- [x] Preserve direct shipment URLs with a Vercel SPA rewrite.
 
 ### 4. Validation and release
 
@@ -51,6 +55,10 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 ## Current architecture
 
 - `src/App.vue` owns the local data model, state, and dashboard composition.
+- `src/pages/ShipmentsPage.vue` owns the shipment list workflow.
+- `src/pages/ShipmentDetailPage.vue` owns the shipment route, timeline, and exception detail.
+- `src/data/shipments.js` is the shared local shipment data boundary.
+- `src/router.js` defines the overview and shipment routes.
 - `src/style.css` owns the visual system, chart styling, table layout, and responsive breakpoints.
 - `src/main.js` mounts the Vue application and registers Vuetify.
 - `vite.config.js` registers the Vue plugin and Vuetify auto-import support for production builds.

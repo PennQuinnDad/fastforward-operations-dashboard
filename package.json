@@ -12,6 +12,8 @@
     "@vitejs/plugin-vue": "latest",
     "lucide-vue-next": "latest",
     "vite": "latest",
-    "vue": "latest"
+    "vue": "latest",
+    "vite-plugin-vuetify": "latest",
+    "vuetify": "latest"
   }
 }

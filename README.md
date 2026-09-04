@@ -28,7 +28,7 @@ npm run build
 
 ## UI foundation
 
-Vuetify 3 is registered globally and available for future dashboard components. The current overview keeps its custom visual system and Lucide icons so the existing FastForward operations design remains stable while the component library is introduced incrementally.
+Vuetify 3 is registered globally with the Material Design Icons (`mdi`) set available for future dashboard components. The current overview keeps its custom visual system and Lucide icons so the existing FastForward operations design remains stable while the component library is introduced incrementally.
 
 ## Prototype interactions
 

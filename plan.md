@@ -11,7 +11,7 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 - **Information hierarchy:** KPIs first, trend and regional comparison second, actionable exceptions third.
 - **Prototype data strategy:** Keep representative data local until a TMS/API contract exists.
 - **Visual direction:** Use an evergreen operations rail, warm neutral surfaces, and teal/amber/coral status colors to support quick risk scanning.
-- **UI foundation:** Register Vuetify 3 globally for accessible, reusable components while preserving the custom FastForward visual system during incremental adoption.
+- **UI foundation:** Register Vuetify 3 globally with Material Design Icons available for accessible, reusable components while preserving the custom FastForward visual system during incremental adoption.
 
 ## Delivery status
 
@@ -20,7 +20,7 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 - [x] Scaffold a Vue and Vite application.
 - [x] Add the production build command and Vite Vue configuration.
 - [x] Add Lucide icons for consistent interface controls.
-- [x] Add Vuetify 3 and Vite auto-import support as the component foundation.
+- [x] Add Vuetify 3, Vite auto-import support, and the Material Design Icons set as the component foundation.
 - [x] Add repository documentation, AI guidance, and ignore rules.
 
 ### 2. Dashboard experience
@@ -54,7 +54,7 @@ Create a meeting-ready command center for FastForward Logistics leadership. The 
 - `src/style.css` owns the visual system, chart styling, table layout, and responsive breakpoints.
 - `src/main.js` mounts the Vue application and registers Vuetify.
 - `vite.config.js` registers the Vue plugin and Vuetify auto-import support for production builds.
-- `vuetify` is available for future shared controls; the current overview intentionally keeps its custom CSS and Lucide icon treatment.
+- `vuetify` and `@mdi/font` are available for future shared controls; the current overview intentionally keeps its custom CSS and Lucide icon treatment.
 - `context/product-notes.md` records data assumptions and future work.
 
 ## Next production increments
